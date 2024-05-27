@@ -1,14 +1,15 @@
 import React, { ChangeEvent } from 'react';
-import { useDispatch,useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {getFilter} from '../../redax/contacts/contacts-selector';
 import {changeFilter} from '../../redax/contacts/filter-slice';
+import { useAppDispatch } from '../../hooks/hooks';
 
 
 
 export const Filter = () => {
  
   const filterValue:string=useSelector(getFilter);
-  const dispatch=useDispatch();
+  const dispatch= useAppDispatch();
 
   const onFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(changeFilter(e.currentTarget.value));

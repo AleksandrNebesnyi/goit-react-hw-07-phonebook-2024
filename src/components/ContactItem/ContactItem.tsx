@@ -1,5 +1,5 @@
 import css from './ContactItem.module.css';
-// Интерфейс для пропсов
+
 interface IProps {
   id: string;
   name: string;

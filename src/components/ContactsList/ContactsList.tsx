@@ -1,15 +1,13 @@
 import css from './ContactsList.module.css';
 import { ContactItem } from '../ContactItem/ContactItem';
-import { useDispatch,useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {getfilteredContacts} from '../../redax/contacts/contacts-selector';
-import {deleteContact} from '../../redax/contacts/contacts-slice'
+import { deleteContact } from '../../operation';
+import { IContact } from '../../interfaces/contacts-interfaces';
+
+import { useAppDispatch } from '../../hooks/hooks';
 
 
-interface IContact {  
-  id: string;
-  name: string;
-  number: string;
-}
 
 type typeOnDeleteContact= (id: string) => void;
 
@@ -17,11 +15,9 @@ type typeOnDeleteContact= (id: string) => void;
 export const ContactsList = () => {
 
 const contacts:IContact[] = useSelector(getfilteredContacts);
-const dispatch = useDispatch();
+const dispatch = useAppDispatch();
 
 const onDeleteContact:typeOnDeleteContact = (id:string) => {
-
-
   dispatch(deleteContact(id));
 };
 

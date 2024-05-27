@@ -1,9 +1,11 @@
 import { useState,ChangeEvent,FormEvent  } from 'react';
 import css from './ContactForm.module.css';
 import { nanoid } from 'nanoid';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector} from 'react-redux';
 import { getContacts } from '../../redax/contacts/contacts-selector';
-import { addContact } from '../../redax/contacts/contacts-slice';
+import { addContact } from '../../operation';
+import { useAppDispatch } from '../../hooks/hooks';
+
 import Notiflix from 'notiflix';
 
 interface IContact {
@@ -21,7 +23,7 @@ export const ContactForm = () => {
 
   const contacts:IContact[] = useSelector(getContacts);
  
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
@@ -39,7 +41,12 @@ export const ContactForm = () => {
   };
 
   const onSubmit:typeonSubmit = (name, number) => {
-    dispatch(addContact(name, number));
+    
+    const newContact = {
+      name,
+      number
+    }
+    dispatch(addContact(newContact));
   };
   const normalizeName = name.toLowerCase();
   const ifNameAlreadyExist = contacts.some(
